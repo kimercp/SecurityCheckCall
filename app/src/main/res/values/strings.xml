@@ -11,4 +11,9 @@
     <string name="startTime">Please chose start time:</string>
     <string name="saveNewAlarm">Save New Alarm</string>
     <string name="howManyTimes">(How many times the alarm runs)</string>
+    <string name="action_exit">Exit</string>
+    <string name="dialog_conifrmExit">Do You really want to exit the app? This operation will cancel all alarms.</string>
+    <string name="dialog_Yes">Yes</string>
+    <string name="dialog_No">No</string>
+    <string name="dialog_Cancel">Cancel</string>
 </resources>
