@@ -1,6 +1,8 @@
 package com.example.workstation.securitycheckcall;
 
 import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,22 +52,43 @@ public class MainActivity extends AppCompatActivity {
                     .setIcon(null) // or .setIcon(R.drawable.icon_name) to display the icon
                     // Setting Positive "Yes" Btn
                     .setPositiveButton(R.string.dialog_Yes, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
                             // Write your code here to execute after yes
                             System.exit(0);
                         }
                     })
                     // Setting Negative "Cancel" Btn
                     .setNegativeButton(R.string.dialog_Cancel, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
                             // User cancelled the dialog
-                            Toast.makeText(getApplicationContext(),
-                                    "Ok, enjoy the app", Toast.LENGTH_SHORT)
-                                    .show();
+                            Toast.makeText(getApplicationContext(), "Ok, enjoy the app", Toast.LENGTH_SHORT).show();
                         }
                     })
+                    /*.setNeutralButton(R.string.remindMeLater, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })*/
+                    ;
                     // Showing Alert Dialog
-                    .show();
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
+            /*new AlertDialog.Builder(this)
+                    .setTitle(R.string.action_exit)
+                    .setMessage(R.string.dialog_conifrmExit)
+                    .setIcon(null)
+                    .setPositiveButton(R.string.dialog_Yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            System.exit(0);
+                        }
+                    })
+                    .setNegativeButton(R.string.dialog_Cancel, null)
+                    .setNeutralButton(R.string.remindMeLater, null).show();*/
         }
         return super.onOptionsItemSelected(item);
     }
