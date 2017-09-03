@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">SecurityCheckCall</string>
+    <string name="startAlarm">Start</string>
+    <string name="newAlarm">New</string>
+    <string name="deleteAlarm">Delete</string>
+    <string name="secondTitleLine">Check Call</string>
+    <string name="firstTitleLine">Security</string>
+    <string name="createdInfo">Created by KimerCP</string>
+    <string name="createNewAlarm">Create New Alarm</string>
+    <string name="occurrence">Occurrence:</string>
+    <string name="startTime">Please chose start time:</string>
+    <string name="saveNewAlarm">Save New Alarm</string>
+    <string name="howManyTimes">(How many times the alarm runs)</string>
+</resources>

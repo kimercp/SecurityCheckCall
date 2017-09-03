@@ -1,0 +1,75 @@
+Index: app/src/main/res/layout/activity_new_alarm.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_new_alarm.xml	(date 1504376259000)
++++ app/src/main/res/layout/activity_new_alarm.xml	(revision )
+@@ -15,7 +15,7 @@
+         android:gravity="center"
+         android:text="@string/createNewAlarm"
+         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+-        android:textColor="?android:attr/textColorSearchUrl"
++        android:textColor="#7fa87f"
+         app:layout_constraintLeft_toLeftOf="parent"
+         app:layout_constraintTop_toTopOf="parent"
+         android:layout_marginStart="16dp" />
+Index: app/src/main/java/com/example/workstation/securitycheckcall/NewAlarmActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/workstation/securitycheckcall/NewAlarmActivity.java	(date 1504376259000)
++++ app/src/main/java/com/example/workstation/securitycheckcall/NewAlarmActivity.java	(revision )
+@@ -1,7 +1,7 @@
+ package com.example.workstation.securitycheckcall;
+ 
+-import android.support.v7.app.AppCompatActivity;
+ import android.os.Bundle;
++import android.support.v7.app.AppCompatActivity;
+ 
+ public class NewAlarmActivity extends AppCompatActivity {
+ 
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_main.xml	(date 1504376259000)
++++ app/src/main/res/layout/activity_main.xml	(revision )
+@@ -1,12 +1,10 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<android.support.constraint.ConstraintLayout
+-    xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:tools="http://schemas.android.com/tools"
++<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    tools:context="com.example.workstation.securitycheckcall.MainActivity"
+-    >
++    tools:context="com.example.workstation.securitycheckcall.MainActivity">
+     <!--android:background="#333333"-->
+ 
+     <TextView
+@@ -33,7 +31,7 @@
+         android:gravity="center_horizontal"
+         android:text="@string/firstTitleLine"
+         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+-        android:textColor="?android:attr/textColorSearchUrl"
++        android:textColor="#7fa87f"
+         android:textSize="40sp"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintHorizontal_bias="0.502"
+@@ -84,9 +82,9 @@
+         android:layout_width="200dp"
+         android:layout_height="wrap_content"
+         android:enabled="false"
++        android:onClick="newAlarm"
+         android:text="@string/deleteAlarm"
+         android:visibility="visible"
+-        android:onClick="newAlarm"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintLeft_toLeftOf="parent"
+         app:layout_constraintRight_toRightOf="parent"
