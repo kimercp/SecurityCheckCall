@@ -17,4 +17,9 @@
     <string name="dialog_No">No</string>
     <string name="dialog_Cancel">Cancel</string>
     <string name="remindMeLater">Remind me later</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="alarmStartAt">Alarm start at:</string>
+    <string name="alarmSaved">Alarm saved</string>
 </resources>

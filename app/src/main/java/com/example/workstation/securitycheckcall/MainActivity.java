@@ -17,12 +17,31 @@ import android.widget.Toast;
 /* Main menu when user may start the alarm, add new one or delete. */
 public class MainActivity extends AppCompatActivity {
 
-    boolean isAllCaps;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        loginStart();
+    }
+
+    // login feature as AlertDialog
+    private void loginStart() {
+        new AlertDialog.Builder(this)
+                .setView(R.layout.dialog_signin)
+                .setPositiveButton(R.string.login, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // implement validate the password and username here
+                    }
+                })
+                .setNegativeButton(R.string.dialog_Cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // exit the app when user cancel
+                        System.exit(0);
+                    }
+                })
+                .show();
     }
 
     // activate the menu on this activity
@@ -47,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             // Setting Dialog Message
             builder.setMessage(R.string.dialog_conifrmExit)
                     // Setting Dialog Title
-                    .setTitle(R.string.action_exit)
+                    //.setTitle(R.string.action_exit)
                     // Setting Icon to Dialog
                     .setIcon(null) // or .setIcon(R.drawable.icon_name) to display the icon
                     // Setting Positive "Yes" Btn
@@ -100,18 +119,5 @@ public class MainActivity extends AppCompatActivity {
     public void newAlarm(View view) {
         Intent intent = new Intent(this, NewAlarmActivity.class);
         startActivity(intent);
-    }
-
-
-    // test method to change letters for all capitals
-    public void testButton(View view) {
-        TextView textView = (TextView) findViewById(R.id.txtCreatedByKimercp);
-        if (isAllCaps) {
-            textView.setAllCaps(false);
-            isAllCaps = false;
-        } else {
-            textView.setAllCaps(true);
-            isAllCaps = true;
-        }
     }
 }
