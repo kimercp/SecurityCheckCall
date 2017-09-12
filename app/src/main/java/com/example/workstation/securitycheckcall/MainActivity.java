@@ -11,16 +11,44 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 /* Main menu when user may start the alarm, add new one or delete. */
 public class MainActivity extends AppCompatActivity {
+
+   /* // list of strings which will serve as list items
+    private ArrayList<String> arrayList;
+    // defining a string adapter which will handle the data of the listview
+    private ArrayAdapter<String> adapter;*/
+
+  // private ArrayAdapter<String> adapter;
+    // private List<String> liste;
+
+    private ListView list;
+    private ArrayAdapter<String> adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        list = (ListView)findViewById(R.id.lstAlarms);
+
+        String cars[] = {"Mercedes", "Fiat", "Ferrari", "Aston Martin", "Lamborghini", "Skoda", "Volkswagen", "Audi", "Citroen"};
+        ArrayList<String> carL = new ArrayList<String>();
+        carL.addAll(Arrays.asList(cars));
+        adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, carL);
+        list.setAdapter(adapter);
+
         loginStart();
     }
 
@@ -96,7 +124,8 @@ public class MainActivity extends AppCompatActivity {
                     AlertDialog dialog = builder.create();
                     dialog.show();
 
-            /*new AlertDialog.Builder(this)
+            /* // another way for alertdialog message
+            new AlertDialog.Builder(this)
                     .setTitle(R.string.action_exit)
                     .setMessage(R.string.dialog_conifrmExit)
                     .setIcon(null)
@@ -107,7 +136,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                     })
                     .setNegativeButton(R.string.dialog_Cancel, null)
-                    .setNeutralButton(R.string.remindMeLater, null).show();*/
+                    .setNeutralButton(R.string.remindMeLater, null).show();
+                    */
         }
         return super.onOptionsItemSelected(item);
     }
