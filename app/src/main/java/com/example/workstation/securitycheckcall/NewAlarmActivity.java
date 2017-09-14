@@ -3,18 +3,14 @@ package com.example.workstation.securitycheckcall;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 
 /* This activity will serve adding new alarms only
@@ -22,14 +18,12 @@ import java.util.List;
 * the alarm supposed to start. */
 public class NewAlarmActivity extends AppCompatActivity {
 
-    // defining a string adapter which will handle the data of the list view
-    private ArrayAdapter<String> arrayAdapter;
-    // list of strings which will serve as list items
-    private List<String> arrayList = new ArrayList<String>();
     // edit text field with name of the alarm
     private EditText alarmName;
     private EditText occurrence;
     private TextView textAlarm;
+    // true when user set the alarm using time picker
+    boolean isAlarmTimeSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +44,6 @@ public class NewAlarmActivity extends AppCompatActivity {
                 }
             }
         });
-
-        ListView list = (ListView) findViewById(R.id.lstFollowingAlarms);
-        // Array adapter takes the context of the activity as a
-        // first parameter, the type of list view as a second parameter and your
-        // array as a third parameter.
-        arrayAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, arrayList);
-        list.setAdapter(arrayAdapter);
     }
 
     /* Get the time when alarms should start from user and add display in app as text */
@@ -70,7 +57,7 @@ public class NewAlarmActivity extends AppCompatActivity {
         int minute = c.get(Calendar.MINUTE);
 
         // check if occurrence is not empty otherwise inform the user
-        if (TextUtils.isEmpty(occurrence.getText().toString())) {
+        if (occurrence.getText().toString().isEmpty()) {
             Toast.makeText(NewAlarmActivity.this, R.string.occurrenceFirst,
                     Toast.LENGTH_SHORT).show();
             return;
@@ -92,34 +79,33 @@ public class NewAlarmActivity extends AppCompatActivity {
     /* This method will add set of times of alarms to list, begin from following time and depends from occurrence */
     private void displayFollowingAlarms(int hourOfDay, int minute, int occurrenceNumber) {
 
-        // arrayList needs to be empty before adding items
-        arrayList.clear();
-        // loop starts from 1 and adds value i to hourOfDay
-        for (int i = 1; i < occurrenceNumber; i++) {
-            // reset hours if midnight
+        // populate horizontal scroll view
+        LinearLayout myHorizontalAlarms = (LinearLayout)findViewById(R.id.listFollowingAlarms);
+        for (int i=1; i <occurrenceNumber; i++){
             if (hourOfDay == 23) hourOfDay = 0;
             else hourOfDay++;
-            // add new item
-            arrayList.add(Integer.toString(hourOfDay) + ":" + Integer.toString(minute));
+            TextView textView = new TextView(this);
+            textView.setText(Integer.toString(hourOfDay) + ":" + Integer.toString(minute));
+            textView.setWidth(100);
+            textView.setTextSize(20);
+            myHorizontalAlarms.addView(textView);
         }
-        // notify adapter about change
-        arrayAdapter.notifyDataSetChanged();
+
+        // set the value as true when user set the alarm time
+        isAlarmTimeSet = true;
     }
 
     /* This method will save a new alarm after clicking on button "Save New Alarm" */
     public void saveAlarm_buttonOnClick(View view) {
 
-        // check if alarm name is empty
-        if (TextUtils.isEmpty(alarmName.getText().toString())) {
-            Toast.makeText(NewAlarmActivity.this, R.string.typeTheAlarmName,
+        occurrence = (EditText) findViewById(R.id.edtOccurrence);
+
+        if (!isAlarmTimeSet || alarmName.getText().toString().isEmpty()
+                || occurrence.getText().toString().trim().length()==0) {
+            Toast.makeText(NewAlarmActivity.this, R.string.fillUp,
                     Toast.LENGTH_LONG).show();
             return;
         }
-
-        // add validate of occurence following alrms etc.
-        // maybe when user clicks on time , activate save alarm button
-        // or check all fields
-
         // display the message
         Toast.makeText(NewAlarmActivity.this, R.string.alarmSaved, Toast.LENGTH_LONG).show();
     }

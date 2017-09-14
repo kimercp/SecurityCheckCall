@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">SecurityCheckCall</string>
     <string name="startAlarm">Start</string>
+    <string name="name">Name:</string>
     <string name="newAlarm">New</string>
     <string name="deleteAlarm">Delete</string>
     <string name="secondTitleLine">Check Call</string>
     <string name="firstTitleLine">Security</string>
     <string name="createdInfo">Created by KimerCP</string>
-    <string name="typeTheAlarmName">Type the alarm name, please</string>
     <string name="createNewAlarm">Create New Alarm</string>
     <string name="occurrence">Occurrence:</string>
     <string name="startTime">Please chose start time:</string>
@@ -21,8 +21,10 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
-    <string name="alarmStartAt">Alarm start at:</string>
-    <string name="alarmFollowings">Followings alarms:</string>
+    <string name="alarmStartAt">Alarm start at</string>
+    <string name="alarmFollowings">Followings alarms</string>
     <string name="alarmSaved">Alarm saved</string>
-    <string name="occurrenceFirst">You have to type the occurrence first</string>
+    <string name="occurrenceFirst">The occurrence field can not be empty</string>
+    <string name="typeTheAlarmName">Type the alarm name, please</string>
+    <string name="fillUp">Please, type name, occurrence and set the time when alarm supposed to begin.</string>
 </resources>
