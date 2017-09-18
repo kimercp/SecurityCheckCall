@@ -1,8 +1,5 @@
 package com.example.workstation.securitycheckcall;
 
-import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,65 +8,32 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 /* Main menu when user may start the alarm, add new one or delete. */
 public class MainActivity extends AppCompatActivity {
 
-   /* // list of strings which will serve as list items
-    private ArrayList<String> arrayList;
-    // defining a string adapter which will handle the data of the listview
-    private ArrayAdapter<String> adapter;*/
-
-  // private ArrayAdapter<String> adapter;
-    // private List<String> liste;
-
-    private ListView list;
-    private ArrayAdapter<String> adapter;
-
+    private ListView lstWorkPlace;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        list = (ListView)findViewById(R.id.lstAlarms);
+        // create array with workplace objects
+        WorkPlace workPlace[] = new WorkPlace[] {new WorkPlace(1, "Mercedes",R.drawable.listcircle2),
+                new WorkPlace(2, "Volkswagen",R.drawable.listcircle2),
+                new WorkPlace(3, "BMW",R.drawable.listcircle2),
+                new WorkPlace(4, "Aston Martin", R.drawable.listcircle2),
+                new WorkPlace(10, "Remka auto",R.drawable.listcircle2)
+        };
 
-        String cars[] = {"Mercedes", "Fiat", "Ferrari", "Aston Martin", "Lamborghini", "Skoda", "Volkswagen", "Audi", "Citroen"};
-        ArrayList<String> carL = new ArrayList<String>();
-        carL.addAll(Arrays.asList(cars));
-        adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, carL);
-        list.setAdapter(adapter);
-
-        loginStart();
-    }
-
-    // login feature as AlertDialog
-    private void loginStart() {
-        new AlertDialog.Builder(this)
-                .setView(R.layout.dialog_signin)
-                .setPositiveButton(R.string.login, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // implement validate the password and username here
-                    }
-                })
-                .setNegativeButton(R.string.dialog_Cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // exit the app when user cancel
-                        System.exit(0);
-                    }
-                })
-                .show();
+        // custom adapter to display data in list's row
+        RowAdapter adapter = new RowAdapter(this, R.layout.mymodel, workPlace);
+        // set adapter to listview
+        lstWorkPlace = (ListView)findViewById(R.id.workPlaceList);
+        lstWorkPlace.setAdapter(adapter);
     }
 
     // activate the menu on this activity
