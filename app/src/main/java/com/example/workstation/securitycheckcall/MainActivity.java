@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             // create a dialog (question to user to confirm exit)
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             // Setting Dialog Message
-            builder.setMessage(R.string.dialog_conifrmExit)
+            builder.setMessage(R.string.dialog_confirmExit)
                     // Setting Dialog Title
                     //.setTitle(R.string.action_exit)
                     // Setting Icon to Dialog
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
      clicking on button "New alarm"
      where user may choose time, occurrence, etc.*/
     public void newAlarm(View view) {
-        Intent intent = new Intent(this, NewAlarmActivity.class);
+        Intent intent = new Intent(this, SetNewAlarmActivity.class);
         startActivity(intent);
     }
 }

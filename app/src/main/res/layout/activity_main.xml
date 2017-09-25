@@ -100,7 +100,7 @@
                     android:gravity="center"
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
-                    android:text="Choose the alarm to start"
+                    android:text="@string/chooseAlarm"
                     android:textColor="#eeeeee" />
 
                 <ImageButton

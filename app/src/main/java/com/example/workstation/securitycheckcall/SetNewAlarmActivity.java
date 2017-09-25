@@ -1,8 +1,8 @@
 package com.example.workstation.securitycheckcall;
 
 import android.app.TimePickerDialog;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -12,11 +12,11 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
-
 /* This activity will serve adding new alarms only
 * User may set the name, occurrence and time when
 * the alarm supposed to start. */
-public class NewAlarmActivity extends AppCompatActivity {
+public class SetNewAlarmActivity extends AppCompatActivity {
+
 
     // edit text field with name of the alarm
     private EditText alarmName;
@@ -27,10 +27,8 @@ public class NewAlarmActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_alarm);
-
+        setContentView(R.layout.activity_set_new_alarm);
         alarmName = (EditText) findViewById(R.id.edtAlarmName);
         // default text in edit text field service (put default text if is empty)
         alarmName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -58,13 +56,13 @@ public class NewAlarmActivity extends AppCompatActivity {
 
         // check if occurrence is not empty otherwise inform the user
         if (occurrence.getText().toString().isEmpty()) {
-            Toast.makeText(NewAlarmActivity.this, R.string.occurrenceFirst,
+            Toast.makeText(SetNewAlarmActivity.this, R.string.occurrenceFirst,
                     Toast.LENGTH_SHORT).show();
             return;
         }
 
         // display date time picker for user to choose time
-        new TimePickerDialog(NewAlarmActivity.this, new TimePickerDialog.OnTimeSetListener() {
+        new TimePickerDialog(SetNewAlarmActivity.this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             // Called when the user is done setting a new time and the dialog has closed
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -102,11 +100,11 @@ public class NewAlarmActivity extends AppCompatActivity {
 
         if (!isAlarmTimeSet || alarmName.getText().toString().isEmpty()
                 || occurrence.getText().toString().trim().length()==0) {
-            Toast.makeText(NewAlarmActivity.this, R.string.fillUp,
+            Toast.makeText(SetNewAlarmActivity.this, R.string.fillUp,
                     Toast.LENGTH_LONG).show();
             return;
         }
         // display the message
-        Toast.makeText(NewAlarmActivity.this, R.string.alarmSaved, Toast.LENGTH_LONG).show();
+        Toast.makeText(SetNewAlarmActivity.this, R.string.alarmSaved, Toast.LENGTH_LONG).show();
     }
 }
