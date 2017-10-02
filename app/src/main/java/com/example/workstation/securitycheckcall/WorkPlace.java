@@ -1,6 +1,6 @@
 package com.example.workstation.securitycheckcall;
 
-/* This class is to create an instance of object which will keep data to display in separate roww.
+/* This class is to create an instance of object which will keep data to display in separate row.
  */
 public class WorkPlace {
 

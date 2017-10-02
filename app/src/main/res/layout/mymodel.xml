@@ -57,13 +57,12 @@
             android:textStyle="bold|italic" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/txtAlarmTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="sans-serif"
             android:gravity="top|center"
-            android:text="Cardiff"
             android:textColor="#D3D32E"
             android:textSize="12sp" />
 

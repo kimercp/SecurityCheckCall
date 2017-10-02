@@ -9,55 +9,59 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 /* Custom adapter to display rows in listview component */
-public class RowAdapter extends ArrayAdapter<WorkPlace> {
+public class RowAdapter extends ArrayAdapter<AlarmDetails> {
 
     Context context;
     int layoutResourceId;
-    WorkPlace data[] = null;
+    List<AlarmDetails> data = null;
 
-    public RowAdapter(Context context, int layoutResourceId, WorkPlace[] data) {
+    public RowAdapter(Context context, int layoutResourceId, List<AlarmDetails> data) {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
-        // passing WorkPlace array from constructor to local array variable
+        // passing AlarmDetails array from constructor to local array variable
         this.data = data;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
-        WorkPlaceHolder holder = null;
+        AlarmDetailsHolder holder = null;
 
         if(row == null)
         {
             LayoutInflater inflater = ((Activity)context).getLayoutInflater();
             row = inflater.inflate(layoutResourceId, parent, false);
 
-            holder = new WorkPlaceHolder();
+            holder = new AlarmDetailsHolder();
             holder.imgIcon = (ImageView)row.findViewById(R.id.imgIcon);
             holder.txtTitle = (TextView)row.findViewById(R.id.txtTitle);
             holder.txtNumber = (TextView)row.findViewById(R.id.txtNumber);
+            holder.txtAlarmTime = (TextView)row.findViewById(R.id.txtAlarmTime);
 
             row.setTag(holder);
         }
         else
         {
-            holder = (WorkPlaceHolder)row.getTag();
+            holder = (AlarmDetailsHolder)row.getTag();
         }
 
-        holder.txtTitle.setText(data[position].title);
-        holder.txtNumber.setText(Integer.toString(data[position].numberOfList));
-        holder.imgIcon.setImageResource(data[position].icon);
-
+        String tempTextAlarmTime = this.getContext().getResources().getString(R.string.alarmSetFor);
+        holder.txtAlarmTime.setText(tempTextAlarmTime +""+data.get(position).getHourOfDay()+":"+data.get(position).getMinuteOfHour());
+        holder.txtTitle.setText(data.get(position).getName());
+        holder.txtNumber.setText(Integer.toString(position+1));
 
         return row;
     }
 
-    static class WorkPlaceHolder
+    static class AlarmDetailsHolder
     {
         ImageView imgIcon;
         TextView txtTitle;
         TextView txtNumber;
+        TextView txtAlarmTime;
     }
 }
