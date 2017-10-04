@@ -1,22 +1,28 @@
 package com.example.workstation.securitycheckcall;
 
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.security.AccessController.getContext;
 
 /* Main menu when user may start the alarm, add new one or delete. */
 public class MainActivity extends AppCompatActivity {
@@ -24,20 +30,45 @@ public class MainActivity extends AppCompatActivity {
     private ListView lstWorkPlace;
     // this list is going to be saved and read from file
     private List<AlarmDetails> myListOfAlarmDetails = new ArrayList<AlarmDetails>();
+    private RowAdapter adapter;
+    static int positionToRemoveFromList;
+    private Button btnDelete;
+    private Button btnStart;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // load data from file to listview component
+        loadData();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // read the data from file with alarms details
-        myListOfAlarmDetails = null;
-        myListOfAlarmDetails = readList();
-        // custom adapter to display data in list's row
-        RowAdapter adapter = new RowAdapter(this, R.layout.mymodel, myListOfAlarmDetails);
-        // set adapter to listview
+        btnDelete = (Button)findViewById(R.id.btnDelete);
+        btnStart = (Button)findViewById(R.id.btnStart);
         lstWorkPlace = (ListView)findViewById(R.id.workPlaceList);
-        lstWorkPlace.setAdapter(adapter);
+
+        myListOfAlarmDetails = null;
+        // load data from file to listview component
+        loadData();
+
+        // create on item click listener for list with alarms
+        lstWorkPlace.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                positionToRemoveFromList = position;
+                setListViewBackground(ContextCompat.getColor(MainActivity.this, R.color.backroundActivities));
+                // enable start and delete button
+                btnDelete.setEnabled(true);
+                btnStart.setEnabled(true);
+                // change the color of actually selected item
+                view.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.selectedItemColor));
+            }
+        });
     }
 
 //    // activate the menu on this activity
@@ -110,6 +141,22 @@ public class MainActivity extends AppCompatActivity {
 //        return super.onOptionsItemSelected(item);
 //    }
 
+    /* This method check if file is already exist, load the data from file to display in listview component
+       Check for file if exist is not necessary because if the file is not exist the function readList return null anyway.
+     */
+    public void loadData(){
+        // check if file exist in internal storage
+        File file=new File(this.getFilesDir(),getResources().getString(R.string.fileWithListofAlarms));
+        // read the data from file with alarms details
+        if(file.exists()) myListOfAlarmDetails = readList();
+        if (myListOfAlarmDetails!=null) {
+            // custom adapter to display data in list's row
+            adapter = new RowAdapter(this, R.layout.mymodel, myListOfAlarmDetails);
+            // set adapter to listview
+            lstWorkPlace.setAdapter(adapter);
+        }
+    }
+
     /* This method will open new activity after
      clicking on button "New alarm"
      where user may choose time, occurrence, etc.*/
@@ -118,11 +165,46 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void deleteAlarm(View view){
+
+        // remove an item from list only if is not empty
+        if (!myListOfAlarmDetails.isEmpty() && positionToRemoveFromList != -1) {
+            myListOfAlarmDetails.remove(positionToRemoveFromList);
+            // reset the selected position on list
+            positionToRemoveFromList = -1;
+            // set false because item has been removed
+            btnDelete.setEnabled(false);
+            btnStart.setEnabled(false);
+
+            setListViewBackground(ContextCompat.getColor(MainActivity.this, R.color.backroundActivities));
+        }
+        else {
+            // set false because the list is empty
+            btnDelete.setEnabled(false);
+            btnStart.setEnabled(false);
+        }
+
+        // save the new list
+        writeList(myListOfAlarmDetails);
+        adapter.notifyDataSetChanged();
+    }
+
+    // this method set the color on listview background
+    private void setListViewBackground(int backgroundColor) {
+        // number of all items in listview
+        int lenghtOfList = lstWorkPlace.getAdapter().getCount();
+        // change the background color of all items in a list
+        for (int i=0; i<lenghtOfList; i++){
+            View child = lstWorkPlace.getChildAt(i);
+            child.setBackgroundColor(backgroundColor);
+        }
+    }
+
     /* Method to read list of AlarmDetails from file on internal storage */
     private List<AlarmDetails> readList(){
         List<AlarmDetails> tempList = null;
         try {
-            FileInputStream fis = openFileInput("file.txt");
+            FileInputStream fis = openFileInput(getResources().getString(R.string.fileWithListofAlarms));
             ObjectInputStream is = new ObjectInputStream(fis);
             tempList = (List<AlarmDetails>) is.readObject();
             is.close();
@@ -134,5 +216,17 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return tempList;
+    }
+
+    /* Method to save list of AlarmDetails into file on internal storage */
+    private void writeList(List<AlarmDetails> myListOfAlarmDetails) {
+        try {
+            FileOutputStream fos = openFileOutput(getResources().getString(R.string.fileWithListofAlarms), MODE_PRIVATE);
+            ObjectOutputStream os = new ObjectOutputStream(fos);
+            os.writeObject(myListOfAlarmDetails);
+            os.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

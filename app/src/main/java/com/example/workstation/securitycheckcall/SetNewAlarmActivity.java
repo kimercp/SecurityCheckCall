@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -135,7 +136,10 @@ public class SetNewAlarmActivity extends AppCompatActivity {
 
         // read the data from file with alarms details
         myListOfAlarmDetails = new ArrayList<AlarmDetails>();
-        myListOfAlarmDetails  = readList();
+        // check if file exist in internal storage
+        File file=new File(this.getFilesDir(),getResources().getString(R.string.fileWithListofAlarms));
+        // read the data from file with alarms details
+        if(file.exists()) myListOfAlarmDetails = readList();
 //        if (myListOfAlarmDetails  != null) {
 //            AlarmDetails newAlarm = myListOfAlarmDetails .get(0);
 //            Toast.makeText(this, "First element "+newAlarm.getName()+". Lenght: "+ myListOfAlarmDetails.size() , Toast.LENGTH_SHORT).show();
@@ -201,7 +205,7 @@ public class SetNewAlarmActivity extends AppCompatActivity {
     /* Method to save list of AlarmDetails into file on internal storage */
     private void writeList(List<AlarmDetails> myListOfAlarmDetails) {
         try {
-            FileOutputStream fos = openFileOutput("file.txt", MODE_PRIVATE);
+            FileOutputStream fos = openFileOutput(getResources().getString(R.string.fileWithListofAlarms), MODE_PRIVATE);
             ObjectOutputStream os = new ObjectOutputStream(fos);
             os.writeObject(myListOfAlarmDetails);
             os.close();
@@ -214,7 +218,7 @@ public class SetNewAlarmActivity extends AppCompatActivity {
     private List<AlarmDetails> readList(){
         List<AlarmDetails> tempList = null;
         try {
-            FileInputStream fis = openFileInput("file.txt");
+            FileInputStream fis = openFileInput(getResources().getString(R.string.fileWithListofAlarms));
             ObjectInputStream is = new ObjectInputStream(fis);
             tempList = (List<AlarmDetails>) is.readObject();
             is.close();

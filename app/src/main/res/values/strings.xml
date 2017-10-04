@@ -31,4 +31,5 @@
     <string name="chooseAlarm">Choose the alarm to start</string>
     <string name="alarmName">Alarm name:</string>
     <string name="alarmSetFor">"Alarm set for "</string>
+    <string name="fileWithListofAlarms">"temyu.txt"</string>
 </resources>
