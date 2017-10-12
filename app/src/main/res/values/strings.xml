@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">SecurityCheckCall</string>
     <string name="startAlarm">Start</string>
+    <string name="name">Name:</string>
     <string name="newAlarm">New</string>
     <string name="deleteAlarm">Delete</string>
     <string name="secondTitleLine">Check Call</string>
@@ -8,7 +9,35 @@
     <string name="createdInfo">Created by KimerCP</string>
     <string name="createNewAlarm">Create New Alarm</string>
     <string name="occurrence">Occurrence:</string>
-    <string name="startTime">Please chose start time:</string>
+    <string name="startTime">Set up the time</string>
     <string name="saveNewAlarm">Save New Alarm</string>
     <string name="howManyTimes">(How many times the alarm runs)</string>
+    <string name="action_exit">Exit</string>
+    <string name="dialog_confirmExit">Do You really want to exit the app?</string>
+    <string name="dialog_Yes">Yes</string>
+    <string name="dialog_No">No</string>
+    <string name="dialog_Cancel">Cancel</string>
+    <string name="reset">Reset all fields</string>
+    <string name="remindMeLater">Remind me later</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="alarmStartAt">Alarm starts at:</string>
+    <string name="alarmFollowings">Followings alarms</string>
+    <string name="alarmSaved">Alarm settings saved</string>
+    <string name="occurrenceFirst">The occurrence and alarm name fields can not be empty</string>
+    <string name="typeTheAlarmName">Type the alarm name here, please</string>
+    <string name="fillUp">Please, type name, occurrence and set the time when alarm supposed to begin.</string>
+    <string name="chooseAlarm">Choose the alarm to start</string>
+    <string name="alarmName">Alarm name:</string>
+    <string name="alarmSetFor">"Alarm set for "</string>
+    <string name="runAlarmText">"Alarm enabled"</string>
+    <string name="stopAlarm">"Stop alarm"</string>
+    <string name="sound">"Sound"</string>
+    <string name="vibration">"Vibration"</string>
+    <string name="soundandvibration">"Sound and Vibration"</string>
+    <string name="fileWithListofAlarms">"kim.txt"</string>
+    <string name="currentTime">Current time:</string>
+    <string name="countdown">Countdown:</string>
+    <string name="nextAlarm">Next alarm:</string>
 </resources>

@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    tools:context="com.example.workstation.securitycheckcall.SetNewAlarmActivity">
+
+    <LinearLayout
+        android:id="@+id/backgroundTopSection"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="#00000000"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:id="@+id/topSection"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="#272525"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:visibility="visible"
+                app:srcCompat="@drawable/onlylogo" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtFirstLineTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="right|center"
+                    android:paddingLeft="0dp"
+                    android:text="@string/firstTitleLine"
+                    android:textColor="#ffffff"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtSecondLineTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="left|center"
+                    android:text="@string/secondTitleLine"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- second section -->
+    <LinearLayout
+        android:id="@+id/backgroundMiddleSection"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:background="#00000000"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/middleSection"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="#272525"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#3F4F06"
+                    android:gravity="center"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:text="@string/createNewAlarm"
+                    android:textColor="#eeeeee" />
+
+                <ImageButton
+                    android:id="@+id/imageButton2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:adjustViewBounds="false"
+                    android:background="#3F4F06"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/gear" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:gravity="left">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/alarmName"
+                    android:textColor="#FFFFFF" />
+
+                <EditText
+                    android:id="@+id/edtAlarmName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginLeft="15dp"
+                    android:hint="@string/typeTheAlarmName"
+                    android:inputType="textPersonName"
+                    android:textColor="#EEEEEE"
+                    android:textColorHint="#888888"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/occurrence"
+                    android:textColor="#FFFFFF" />
+
+                <ImageButton
+                    android:id="@+id/ibtnDecrementOccurrence"
+                    android:layout_width="35dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="50dp"
+                    android:background="@drawable/arrow"
+                    android:onClick="substractOccurrence"
+                    android:scaleX="-1" />
+
+                <EditText
+                    android:id="@+id/edtOccurrence"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:hint="12"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:textColor="#EEEEEE"
+                    android:textColorHint="#888888"
+                    android:textSize="20sp" />
+
+                <ImageButton
+                    android:id="@+id/ibtnIncrementOccurrence"
+                    android:layout_width="35dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/arrow"
+                    android:onClick="addOccurrence" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp">
+
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/imgviewSetTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/button"
+                        android:onClick="takeTime" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/startTime"
+                            android:textColor="#FFFFFF" />
+
+                        <ImageView
+                            android:id="@+id/clock"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="5dp"
+                            android:background="@drawable/roundclock"
+                            android:onClick="takeTime" />
+                    </LinearLayout>
+
+
+                </FrameLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:gravity="left|center"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/alarmStartAt"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="18sp" />
+
+
+                    <TextView
+                        android:id="@+id/txtAlarmTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-smallcaps"
+                        android:gravity="left"
+                        android:text="00:00"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="28sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/alarmFollowings"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="18sp" />
+
+                <HorizontalScrollView
+                    android:id="@+id/horizontalScrollView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:id="@+id/listFollowingAlarms"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" />
+                </HorizontalScrollView>
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/backgroundBottomSection"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="#00000000"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_weight="1"
+            android:background="#272525"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnSaveAlarm"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:layout_weight="0.47"
+                android:background="@drawable/button"
+                android:fontFamily="sans-serif"
+                android:onClick="saveAlarm_buttonOnClick"
+                android:text="@string/saveNewAlarm"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/bottomSection"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.47"
+                android:background="#1D2028"
+                android:orientation="horizontal">
+
+
+                <Button
+                    android:id="@+id/btnReset"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button"
+                    android:onClick="resetAll"
+                    android:text="@string/reset"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtCreatedByKimercp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_weight="4"
+            android:gravity="bottom|center"
+            android:text="@string/createdInfo"
+            android:textColor="#888888"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.989" />
+    </LinearLayout>
+
+</LinearLayout>
