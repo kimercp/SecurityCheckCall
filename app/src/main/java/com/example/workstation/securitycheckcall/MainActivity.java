@@ -1,8 +1,6 @@
 package com.example.workstation.securitycheckcall;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +8,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,23 +19,25 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.security.AccessController.getContext;
-
 /* Main menu when user may start the alarm, add new one or delete. */
 public class MainActivity extends AppCompatActivity {
 
+    static int positionOnList;
     private ListView lstWorkPlace;
     // this list is going to be saved and read from file
     private List<AlarmDetails> myListOfAlarmDetails = new ArrayList<AlarmDetails>();
     private RowAdapter adapter;
-    static int positionToRemoveFromList;
     private Button btnDelete;
     private Button btnStart;
 
+    /* This will run when user back to main activity */
     @Override
     protected void onResume() {
         super.onResume();
 
+        // set those buttons disabled because no item has been select when back to main activity
+        btnDelete.setEnabled(false);
+        btnStart.setEnabled(false);
         // load data from file to listview component
         loadData();
     }
@@ -48,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnDelete = (Button)findViewById(R.id.btnDelete);
-        btnStart = (Button)findViewById(R.id.btnStart);
-        lstWorkPlace = (ListView)findViewById(R.id.workPlaceList);
+        btnDelete = (Button) findViewById(R.id.btnDelete);
+        btnStart = (Button) findViewById(R.id.btnStart);
+        lstWorkPlace = (ListView) findViewById(R.id.workPlaceList);
 
         myListOfAlarmDetails = null;
         // load data from file to listview component
@@ -60,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         lstWorkPlace.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                positionToRemoveFromList = position;
+                positionOnList = position;
                 setListViewBackground(ContextCompat.getColor(MainActivity.this, R.color.backroundActivities));
                 // enable start and delete button
                 btnDelete.setEnabled(true);
@@ -118,10 +117,10 @@ public class MainActivity extends AppCompatActivity {
 //
 //                        }
 //                    })*/
-//                    ;
-//                    // Showing Alert Dialog
-//                    AlertDialog dialog = builder.create();
-//                    dialog.show();
+//            ;
+//            // Showing Alert Dialog
+//            AlertDialog dialog = builder.create();
+//            dialog.show();
 //
 //            /* // another way for alertdialog message
 //            new AlertDialog.Builder(this)
@@ -144,12 +143,12 @@ public class MainActivity extends AppCompatActivity {
     /* This method check if file is already exist, load the data from file to display in listview component
        Check for file if exist is not necessary because if the file is not exist the function readList return null anyway.
      */
-    public void loadData(){
+    public void loadData() {
         // check if file exist in internal storage
-        File file=new File(this.getFilesDir(),getResources().getString(R.string.fileWithListofAlarms));
+        File file = new File(this.getFilesDir(), getResources().getString(R.string.fileWithListofAlarms));
         // read the data from file with alarms details
-        if(file.exists()) myListOfAlarmDetails = readList();
-        if (myListOfAlarmDetails!=null) {
+        if (file.exists()) myListOfAlarmDetails = readList();
+        if (myListOfAlarmDetails != null) {
             // custom adapter to display data in list's row
             adapter = new RowAdapter(this, R.layout.mymodel, myListOfAlarmDetails);
             // set adapter to listview
@@ -165,20 +164,39 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void deleteAlarm(View view){
+    /* This method will open new activity after
+     clicking on button "New alarm"
+     where user may choose time, occurrence, etc.*/
+    public void runAlarm(View view) {
+
+        // run the selected alarm
+//        if (!myListOfAlarmDetails.isEmpty() && positionOnList != -1) {
+            AlarmDetails passingAlarm = myListOfAlarmDetails.get(positionOnList);
+            // using context and next component class to create intent
+            Intent intent = new Intent(this, RunAlarmActivity.class);
+            // using putExtra(String key, Serializable value) method
+            intent.putExtra("serializeData",passingAlarm);
+            startActivity(intent);
+//        } else {
+//            // set false because the list is empty
+//            btnStart.setEnabled(false);
+//        }
+    }
+
+    /* Delete selected alarm from the list */
+    public void deleteAlarm(View view) {
 
         // remove an item from list only if is not empty
-        if (!myListOfAlarmDetails.isEmpty() && positionToRemoveFromList != -1) {
-            myListOfAlarmDetails.remove(positionToRemoveFromList);
+        if (!myListOfAlarmDetails.isEmpty() && positionOnList != -1) {
+            myListOfAlarmDetails.remove(positionOnList);
             // reset the selected position on list
-            positionToRemoveFromList = -1;
+            positionOnList = -1;
             // set false because item has been removed
             btnDelete.setEnabled(false);
             btnStart.setEnabled(false);
 
             setListViewBackground(ContextCompat.getColor(MainActivity.this, R.color.backroundActivities));
-        }
-        else {
+        } else {
             // set false because the list is empty
             btnDelete.setEnabled(false);
             btnStart.setEnabled(false);
@@ -189,19 +207,19 @@ public class MainActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    // this method set the color on listview background
+    // this method change the color on listview background
     private void setListViewBackground(int backgroundColor) {
         // number of all items in listview
         int lenghtOfList = lstWorkPlace.getAdapter().getCount();
         // change the background color of all items in a list
-        for (int i=0; i<lenghtOfList; i++){
+        for (int i = 0; i < lenghtOfList; i++) {
             View child = lstWorkPlace.getChildAt(i);
             child.setBackgroundColor(backgroundColor);
         }
     }
 
     /* Method to read list of AlarmDetails from file on internal storage */
-    private List<AlarmDetails> readList(){
+    private List<AlarmDetails> readList() {
         List<AlarmDetails> tempList = null;
         try {
             FileInputStream fis = openFileInput(getResources().getString(R.string.fileWithListofAlarms));

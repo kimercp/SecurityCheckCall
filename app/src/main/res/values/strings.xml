@@ -31,5 +31,13 @@
     <string name="chooseAlarm">Choose the alarm to start</string>
     <string name="alarmName">Alarm name:</string>
     <string name="alarmSetFor">"Alarm set for "</string>
-    <string name="fileWithListofAlarms">"temyu.txt"</string>
+    <string name="runAlarmText">"Alarm enabled"</string>
+    <string name="stopAlarm">"Stop alarm"</string>
+    <string name="sound">"Sound"</string>
+    <string name="vibration">"Vibration"</string>
+    <string name="soundandvibration">"Sound and Vibration"</string>
+    <string name="fileWithListofAlarms">"kim.txt"</string>
+    <string name="currentTime">Current time:</string>
+    <string name="countdown">Countdown:</string>
+    <string name="nextAlarm">Next alarm:</string>
 </resources>

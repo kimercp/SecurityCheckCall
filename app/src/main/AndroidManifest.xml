@@ -24,9 +24,12 @@
         <!-- New alarm activity to add new alarm into dataase app -->
         <activity
             android:name=".SetNewAlarmActivity"
-            android:screenOrientation="portrait"
-            >
-        </activity>
+            android:screenOrientation="portrait"></activity>
+
+        <!-- New activity to run an alarm and inform the user about them -->
+        <activity android:name=".RunAlarmActivity"
+            android:screenOrientation="portrait"></activity>
+
     </application>
 
 </manifest>

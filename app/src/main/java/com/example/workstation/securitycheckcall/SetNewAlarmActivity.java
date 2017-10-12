@@ -134,16 +134,11 @@ public class SetNewAlarmActivity extends AppCompatActivity {
             return;
         }
 
-        // read the data from file with alarms details
         myListOfAlarmDetails = new ArrayList<AlarmDetails>();
         // check if file exist in internal storage
-        File file=new File(this.getFilesDir(),getResources().getString(R.string.fileWithListofAlarms));
+        File file = new File(this.getFilesDir(),getResources().getString(R.string.fileWithListofAlarms));
         // read the data from file with alarms details
-        if(file.exists()) myListOfAlarmDetails = readList();
-//        if (myListOfAlarmDetails  != null) {
-//            AlarmDetails newAlarm = myListOfAlarmDetails .get(0);
-//            Toast.makeText(this, "First element "+newAlarm.getName()+". Lenght: "+ myListOfAlarmDetails.size() , Toast.LENGTH_SHORT).show();
-//        } else Toast.makeText(this,"The file wich keeps the alarms details is empty",Toast.LENGTH_SHORT).show();
+        if (file.exists()) myListOfAlarmDetails = readList();
 
         // add an object AlarmDetails to list which will be saved in file
         myListOfAlarmDetails.add(myAlarmDetails);

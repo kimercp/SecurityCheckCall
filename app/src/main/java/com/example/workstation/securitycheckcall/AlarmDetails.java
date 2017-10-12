@@ -32,6 +32,9 @@ public class AlarmDetails implements Serializable {
         }
     }
 
+    // second constructor
+    public AlarmDetails(){ }
+
     public String getName() {
         return name;
     }
