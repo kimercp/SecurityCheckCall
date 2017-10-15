@@ -50,7 +50,19 @@ public class RowAdapter extends ArrayAdapter<AlarmDetails> {
         }
 
         String tempTextAlarmTime = this.getContext().getResources().getString(R.string.alarmSetFor);
-        holder.txtAlarmTime.setText(tempTextAlarmTime +""+data.get(position).getHourOfDay()+":"+data.get(position).getMinuteOfHour());
+
+        String hourDisplayFormat = "";
+        String minuteDisplayFormat = "";
+        int hour = data.get(position).getHourOfDay();
+        int minute = data.get(position).getMinuteOfHour();
+
+        // format time output
+        if (hour < 10) hourDisplayFormat = "0" + hour;
+        else hourDisplayFormat = "" + hour;
+        if (minute < 10) minuteDisplayFormat = "0" + minute;
+        else minuteDisplayFormat = "" + minute;
+
+        holder.txtAlarmTime.setText(tempTextAlarmTime +""+hourDisplayFormat+":"+minuteDisplayFormat);
         holder.txtTitle.setText(data.get(position).getName());
         holder.txtNumber.setText(Integer.toString(position+1));
 

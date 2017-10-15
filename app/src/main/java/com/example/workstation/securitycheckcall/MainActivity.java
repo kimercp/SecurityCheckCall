@@ -170,17 +170,12 @@ public class MainActivity extends AppCompatActivity {
     public void runAlarm(View view) {
 
         // run the selected alarm
-//        if (!myListOfAlarmDetails.isEmpty() && positionOnList != -1) {
             AlarmDetails passingAlarm = myListOfAlarmDetails.get(positionOnList);
             // using context and next component class to create intent
             Intent intent = new Intent(this, RunAlarmActivity.class);
             // using putExtra(String key, Serializable value) method
             intent.putExtra("serializeData",passingAlarm);
             startActivity(intent);
-//        } else {
-//            // set false because the list is empty
-//            btnStart.setEnabled(false);
-//        }
     }
 
     /* Delete selected alarm from the list */

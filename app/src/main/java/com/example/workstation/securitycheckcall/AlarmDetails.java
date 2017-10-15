@@ -23,7 +23,7 @@ public class AlarmDetails implements Serializable {
         // add first time
         followingAlarms.add(Integer.toString(hour) + ":" + Integer.toString(minute));
         // loop to calculate and add to arraylist following alarms
-        for (int i = 0; i < occurrence; i++) {
+        for (int i = 0; i < occurrence-1; i++) {
             // midnight, therefore clock needs to reset to value 0
             if (hour == 23) hour = 0;
             else hour++;

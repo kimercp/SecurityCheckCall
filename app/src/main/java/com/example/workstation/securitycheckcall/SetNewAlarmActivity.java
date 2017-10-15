@@ -93,18 +93,27 @@ public class SetNewAlarmActivity extends AppCompatActivity {
     private void displayFollowingAlarms(int hourOfDay, int minute, int occurrenceNumber) {
 
         int hour = hourOfDay;
+        String hourDisplayFormat = "";
+        String minuteDisplayFormat = "";
 
         // populate horizontal scroll view
         myHorizontalAlarms.removeAllViews();
-        for (int i = 0; i < occurrenceNumber; i++) {
+        for (int i = 0; i < occurrenceNumber-1; i++) {
             // midnight, therefore clock needs to reset to value 0
             if (hour == 23) hour = 0;
             else hour++;
             TextView textView = new TextView(this);
             textView.setTypeface(typeface);
-            textView.setWidth(100);
+            textView.setWidth(150);
             textView.setTextSize(28);
-            textView.setText(Integer.toString(hour) + ":" + Integer.toString(minute));
+
+            // format time output
+            if (hour < 10) hourDisplayFormat = "0" + hour;
+            else hourDisplayFormat = "" + hour;
+            if (minute < 10) minuteDisplayFormat = "0" + minute;
+            else minuteDisplayFormat = "" + minute;
+            textView.setText(hourDisplayFormat + ":" + minuteDisplayFormat);
+
             // set the color for textview
             int timeColor = ContextCompat.getColor(this, R.color.colorAccent);
             textView.setTextColor(timeColor);
@@ -158,10 +167,10 @@ public class SetNewAlarmActivity extends AppCompatActivity {
         if (occurrence.getText().toString().isEmpty()) occurrence.setText("12");
         else {
             int temp = Integer.parseInt(occurrence.getText().toString());
-            if (temp < 36) {
+            if (temp < 24) {
                 temp++;
                 occurrence.setText(Integer.toString(temp));
-            } else occurrence.setText("36");
+            } else occurrence.setText("24");
         }
     }
 
@@ -173,7 +182,7 @@ public class SetNewAlarmActivity extends AppCompatActivity {
         if (occurrence.getText().toString().isEmpty()) occurrence.setText("12");
         else {
             int temp = Integer.parseInt(occurrence.getText().toString());
-            if (temp > 1 && temp < 37) {
+            if (temp > 1 && temp < 25) {
                 temp--;
                 occurrence.setText(Integer.toString(temp));
             } else occurrence.setText("1");
